@@ -1,6 +1,6 @@
 <div #fieldTrigger class="color-field-anchor" [ngClass]="{ 'read-only-style': isReadOnly }" (click)="togglePanel()">
   <mat-form-field class="full-width" [appearance]="appearance">
-    <mat-label>{{ placeholder | translate }}</mat-label>
+    <mat-label>{{ placeholder }}</mat-label>
 
     <div matPrefix class="swatch">
       <div class="swatch-fill" [style.background]="currentRgba()"></div>
@@ -22,7 +22,7 @@
 
     @if (inputControl.hasError('required') && inputControl.touched) {
       <mat-error class="text-red-500 text-[10px] font-thin">
-        {{ placeholder.replace('*', '') | translate }} {{ 'VALIDATE_REQUIRED' | translate }}
+        {{ placeholder.replace('*', '') | translate }} color is required
       </mat-error>
     }
   </mat-form-field>
@@ -54,7 +54,7 @@
 
     <div class="fields-row">
       <div class="input-group">
-        <label>{{ 'FIELD_HEX' | translate }}</label>
+        <label>HEX</label>
         <input type="text" maxlength="7" [(ngModel)]="hexDraft" (change)="onHexInputChange(hexDraft)" />
       </div>
       <div class="input-group-small">
@@ -88,8 +88,8 @@
     </div>
 
     <div class="popover-footer">
-      <button type="button" class="btn" (click)="cancel()">{{ 'BUTTON_CANCEL' | translate }}</button>
-      <button type="button" class="btn primary" (click)="apply()">{{ 'BUTTON_SAVE' | translate }}</button>
+      <button type="button" class="btn" (click)="cancel()">Cancel</button>
+      <button type="button" class="btn primary" (click)="apply()">Save</button>
     </div>
   </div>
 </ng-template>

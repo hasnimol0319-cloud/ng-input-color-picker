@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldAppearance, MatFormFieldModule } from '@angular/material/form-field';
 import {
@@ -46,7 +45,6 @@ export interface HsvaColor {
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule,
     OverlayModule,
     MatFormFieldModule,
     MatInputModule

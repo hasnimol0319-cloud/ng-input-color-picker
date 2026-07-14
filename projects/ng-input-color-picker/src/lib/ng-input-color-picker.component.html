@@ -22,7 +22,7 @@
 
     @if (inputControl.hasError('required') && inputControl.touched) {
       <mat-error class="text-red-500 text-[10px] font-thin">
-        {{ placeholder.replace('*', '') | translate }} color is required
+        {{ placeholder.replace('*', '') }} color is required
       </mat-error>
     }
   </mat-form-field>

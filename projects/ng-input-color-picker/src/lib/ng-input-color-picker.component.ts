@@ -38,7 +38,7 @@ export interface HsvaColor {
 }
 
 @Component({
-  selector: 'lib-ng-input-color-picker',
+  selector: 'ng-input-color-picker',
   templateUrl: './ng-input-color-picker.component.html',
   styleUrls: ['./ng-input-color-picker.component.scss'],
   standalone: true,

@@ -24,12 +24,12 @@ import { NgInputColorPickerComponent } from 'ng-input-color-picker';
   standalone: true,
   imports: [ReactiveFormsModule, NgInputColorPickerComponent],
   template: `
-    <lib-ng-input-color-picker
+    <ng-input-color-picker
       formControlName="brandColor"
       placeholder="Brand color"
       appearance="outline"
       [isRequired]="true">
-    </lib-ng-input-color-picker>
+    </ng-input-color-picker>
   `
 })
 export class MyFormComponent { }

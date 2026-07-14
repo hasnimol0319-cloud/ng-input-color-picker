@@ -48,13 +48,18 @@ export class MyFormComponent { }
 
 ### Theming
 
-The primary/accent color used for focus rings and the "save" button is exposed as a CSS custom property so consuming apps can theme it without needing SCSS build config:
+The picker's accent color (focus ring, active preset outline, "save" button) resolves automatically in this order — first one defined wins:
 
-```css
-lib-ng-input-color-picker {
-  --icp-primary-color: #0B8135;
-}
-```
+1. **`--icp-primary-color`** — set this anywhere above the component (e.g. on `:root` or `body`) in your global styles to theme it explicitly:
+   ```css
+   :root {
+     --icp-primary-color: #6D28D9;
+   }
+   ```
+2. **`--mat-sys-primary`** — if you don't set `--icp-primary-color`, the picker automatically picks up your app's Angular Material color if you're using Material's M3 system-level theming (`mat.theme(...)` / `@include mat.core-theme(...)` in your global styles). No config needed on your end — it just inherits.
+3. **`#0B8135`** — hardcoded fallback if neither of the above is present.
+
+If your app uses Material's legacy M2 theming (SCSS `$primary-color`/palette, no `--mat-sys-*` variables), there's no CSS variable to auto-detect — set `--icp-primary-color` once in your global stylesheet as shown above.
 
 ## Code scaffolding
 

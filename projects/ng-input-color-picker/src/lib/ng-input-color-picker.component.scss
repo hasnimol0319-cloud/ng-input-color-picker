@@ -1,0 +1,299 @@
+:host {
+  display: block;
+  width: 100%;
+  // Override this from a consuming app to theme the picker, e.g.:
+  // lib-ng-input-color-picker { --icp-primary-color: #0B8135; }
+  --icp-primary-color: #0B8135;
+}
+
+.color-field-anchor {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+
+.full-width {
+  width: 100%;
+}
+
+::ng-deep .color-field-anchor input.mat-mdc-input-element,
+::ng-deep .color-field-anchor input.mat-input-element {
+  caret-color: transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+
+.swatch {
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  margin-left: 16px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, .08);
+  flex: 0 0 auto;
+  position: relative;
+  overflow: hidden;
+  background-image:
+    linear-gradient(45deg, #e5e7eb 25%, transparent 25%),
+    linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e5e7eb 75%),
+    linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+
+  .swatch-fill {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  margin-right: 16px;
+  margin-left: 8px;
+  color: rgba(0, 0, 0, .5);
+  flex: 0 0 auto;
+  transition: transform .15s ease;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+.color-popover {
+  width: 280px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(20, 20, 30, .14), 0 2px 6px rgba(20, 20, 30, .08);
+  border: 1px solid rgba(0, 0, 0, .06);
+  padding: 16px;
+}
+
+.sv-square {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: crosshair;
+  touch-action: none;
+
+  .sv-hue-bg,
+  .sv-white,
+  .sv-black {
+    position: absolute;
+    inset: 0;
+  }
+
+  .sv-white {
+    background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+  }
+
+  .sv-black {
+    background: linear-gradient(to top, #000, rgba(0, 0, 0, 0));
+  }
+
+  .sv-cursor {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .35), 0 1px 3px rgba(0, 0, 0, .4);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+}
+
+.slider-row {
+  margin-top: 14px;
+}
+
+.slider {
+  position: relative;
+  height: 12px;
+  border-radius: 6px;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.hue-slider {
+  background: linear-gradient(to right,
+    #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%,
+    #00f 67%, #f0f 83%, #f00 100%);
+}
+
+.alpha-slider {
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+  background-image:
+    linear-gradient(45deg, #e5e7eb 25%, transparent 25%),
+    linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e5e7eb 75%),
+    linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+
+  .a-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+  }
+}
+
+.slider-handle {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, .12);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.fields-row {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  margin-top: 14px;
+}
+
+.input-group-small, .input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+
+  &.small {
+    flex: 0 0 56px;
+  }
+
+  label {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, .5);
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  input {
+    width: 100%;
+    height: 30px;
+    border: 1px solid rgba(0, 0, 0, .23);
+    border-radius: 6px;
+    padding: 0 8px;
+    font-size: 12px;
+    font-family: inherit;
+    color: rgba(0, 0, 0, .87);
+    text-align: center;
+    outline: none;
+
+    &:focus {
+      border-color: var(--icp-primary-color);
+     box-shadow: 0 0 0 3px rgba(11, 129, 53, 0.32);
+    }
+  }
+}
+.input-group{
+  flex-direction: column;
+}
+
+.presets {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+}
+
+.preset {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, .08);
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+
+  &.active::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 7px;
+    border: 2px solid var(--icp-primary-color);
+  }
+}
+
+.popover-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.btn {
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, .23);
+  background: #fff;
+  color: rgba(0, 0, 0, .87);
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(.97);
+  }
+
+  &.primary {
+    background: var(--icp-primary-color);
+    border-color: var(--icp-primary-color);
+    color: #fff;
+  }
+}
+
+::ng-deep .read-only-style .mat-form-field-outline,
+::ng-deep .read-only-style .mat-form-field-flex:hover .mat-form-field-outline-thick {
+  .mat-form-field-outline-start, .mat-form-field-outline-end, .mat-form-field-outline-gap {
+    border: 1px dashed rgba(0, 0, 0, .38);
+  }
+
+  .mat-form-field-outline-start {
+    border-right-style: none;
+  }
+
+  .mat-form-field-outline-end {
+    border-left-style: none;
+  }
+
+  .mat-form-field-outline-gap {
+    border-left-style: none;
+    border-right-style: none;
+    border-top-style: none;
+  }
+}
+
+::ng-deep .read-only-style .mat-form-field-flex {
+  .mat-input-element, .mat-form-field-label {
+    color: rgba(0, 0, 0, .38) !important;
+  }
+}
+
+.read-only-style {
+  cursor: not-allowed;
+
+  .swatch {
+    opacity: .6;
+  }
+}

@@ -1,0 +1,95 @@
+<div #fieldTrigger class="color-field-anchor" [ngClass]="{ 'read-only-style': isReadOnly }" (click)="togglePanel()">
+  <mat-form-field class="full-width" [appearance]="appearance">
+    <mat-label>{{ placeholder | translate }}</mat-label>
+
+    <div matPrefix class="swatch">
+      <div class="swatch-fill" [style.background]="currentRgba()"></div>
+    </div>
+
+    <input
+      matInput
+      type="text"
+      readonly
+      [required]="isRequired"
+      [formControl]="inputControl"
+      (keydown.enter)="$event.preventDefault(); togglePanel()"
+      (keydown.space)="$event.preventDefault(); togglePanel()"
+      (blur)="onTouch()" />
+
+    <svg matSuffix class="chevron" [ngClass]="{ 'open': isOpen }" viewBox="0 0 20 20" fill="none">
+      <path d="M5 7l5 6 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    @if (inputControl.hasError('required') && inputControl.touched) {
+      <mat-error class="text-red-500 text-[10px] font-thin">
+        {{ placeholder.replace('*', '') | translate }} {{ 'VALIDATE_REQUIRED' | translate }}
+      </mat-error>
+    }
+  </mat-form-field>
+</div>
+
+<ng-template #panelTemplate>
+  <div class="color-popover">
+
+    <div class="sv-square" (mousedown)="onSvPointerDown($event)">
+      <div class="sv-hue-bg" [style.background]="'rgb(' + pureHueRgb()[0] + ',' + pureHueRgb()[1] + ',' + pureHueRgb()[2] + ')'"></div>
+      <div class="sv-white"></div>
+      <div class="sv-black"></div>
+      <div class="sv-cursor"
+           [style.left.%]="hsva.s"
+           [style.top.%]="100 - hsva.v"
+           [style.background]="currentRgba()">
+      </div>
+    </div>
+
+    <div class="slider-row">
+      <div class="slider hue-slider" (mousedown)="onHuePointerDown($event)">
+        <div class="slider-handle" [style.left.%]="(hsva.h / 360) * 100" [style.background]="'hsl(' + hsva.h + ',100%,50%)'"></div>
+      </div>
+      <div class="slider alpha-slider" (mousedown)="onAlphaPointerDown($event)">
+        <div class="a-overlay" [style.background]="'linear-gradient(to right, ' + currentRgba(0) + ', ' + currentRgba(100) + ')'"></div>
+        <div class="slider-handle" [style.left.%]="hsva.a"></div>
+      </div>
+    </div>
+
+    <div class="fields-row">
+      <div class="input-group">
+        <label>{{ 'FIELD_HEX' | translate }}</label>
+        <input type="text" maxlength="7" [(ngModel)]="hexDraft" (change)="onHexInputChange(hexDraft)" />
+      </div>
+      <div class="input-group-small">
+        <div class="small">
+        <label>R</label>
+        <input type="number" [(ngModel)]="rDraft" (change)="onRgbInputChange()" />
+        </div>
+        <div class="small">
+          <label>G</label>
+          <input type="number" [(ngModel)]="gDraft" (change)="onRgbInputChange()" />
+        </div>
+        <div class="small">
+          <label>B</label>
+          <input type="number" [(ngModel)]="bDraft" (change)="onRgbInputChange()" />
+        </div>
+        <div class="small">
+          <label>A</label>
+          <input type="number" [(ngModel)]="aDraft" (change)="onAlphaInputChange()" />
+        </div>
+      </div>
+    </div>
+
+    <div class="presets">
+      <div
+        class="preset"
+        *ngFor="let color of presetColors"
+        [style.background]="color"
+        [ngClass]="{ 'active': ('#' + currentHex()) === color.toUpperCase() }"
+        (click)="selectPreset(color)">
+      </div>
+    </div>
+
+    <div class="popover-footer">
+      <button type="button" class="btn" (click)="cancel()">{{ 'BUTTON_CANCEL' | translate }}</button>
+      <button type="button" class="btn primary" (click)="apply()">{{ 'BUTTON_SAVE' | translate }}</button>
+    </div>
+  </div>
+</ng-template>
